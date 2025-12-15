@@ -1,0 +1,238 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sanavi-index-html
+  namespace: default
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hospital SanaVI - Panel de Control</title>
+        <style>
+            :root {
+                --primary: #0056b3;
+                --secondary: #00a8e8;
+                --accent: #27ae60;
+                --bg: #f4f7f6;
+                --text: #333;
+                --white: #ffffff;
+            }
+            body {
+                font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                background-color: var(--bg);
+                color: var(--text);
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            header {
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                color: var(--white);
+                padding: 20px 0;
+                text-align: center;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            header h1 { margin: 0; font-weight: 300; letter-spacing: 1px; }
+            header h1 b { font-weight: 700; }
+            
+            .container {
+                max-width: 900px;
+                margin: 40px auto;
+                padding: 0 20px;
+                flex: 1;
+            }
+            
+            .hero-card {
+                background: var(--white);
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+                text-align: center;
+                margin-bottom: 30px;
+                border-left: 5px solid var(--primary);
+            }
+
+            .status-badge {
+                background-color: rgba(39, 174, 96, 0.1);
+                color: var(--accent);
+                padding: 8px 16px;
+                border-radius: 50px;
+                font-weight: bold;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                border: 1px solid var(--accent);
+            }
+
+            .pulse {
+                width: 10px;
+                height: 10px;
+                background-color: var(--accent);
+                border-radius: 50%;
+                box-shadow: 0 0 0 rgba(39, 174, 96, 0.7);
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7); }
+                70% { box-shadow: 0 0 0 10px rgba(39, 174, 96, 0); }
+                100% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0); }
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .card {
+                background: var(--white);
+                padding: 25px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                transition: transform 0.2s;
+            }
+            .card:hover { transform: translateY(-5px); }
+            
+            .card h3 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+            .card p { font-size: 0.9em; color: #666; }
+            .icon { font-size: 2em; margin-bottom: 10px; display: block; }
+
+            footer {
+                text-align: center;
+                padding: 25px;
+                background-color: #e9ecef;
+                color: #555;
+                font-size: 0.9em;
+                border-top: 1px solid #dcdcdc;
+                margin-top: auto;
+            }
+            .authors {
+                font-weight: 600;
+                color: var(--primary);
+                margin-top: 5px;
+                font-size: 1em;
+            }
+        </style>
+    </head>
+    <body>
+
+        <header>
+            <h1>Hospital <b>SanaVI</b></h1>
+            <p>Plataforma de Gesti&oacute;n Cl&iacute;nica Integral</p>
+        </header>
+
+        <div class="container">
+            <div class="hero-card">
+                <h2>Bienvenido al Sistema Centralizado</h2>
+                <p>Esta plataforma gestiona historias cl&iacute;nicas, citas m&eacute;dicas y facturaci&oacute;n mediante una arquitectura moderna de microservicios.</p>
+                <div class="status-badge">
+                    <div class="pulse"></div>
+                    SISTEMA OPERATIVO Y SEGURO
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <span class="icon">&#128187;</span>
+                    <h3>Frontend Cluster</h3>
+                    <p>Orquestado con <strong>Amazon EKS</strong>.</p>
+                    <p>Escalado autom&aacute;tico (HPA) activo para alta demanda.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">&#9881;</span>
+                    <h3>Backend Serverless</h3>
+                    <p>L&oacute;gica de negocio ejecutada en <strong>AWS Lambda</strong>.</p>
+                    <p>API Gateway gestiona las peticiones seguras.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">&#128274;</span>
+                    <h3>Seguridad Zero-Trust</h3>
+                    <p>Aislamiento de red mediante pol&iacute;ticas <strong>Calico</strong>.</p>
+                    <p>Roles IAM con privilegios m&iacute;nimos.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div>Implementación de Arquitectura Cloud & DevOps</div>
+            <div class="authors">Realizado por Bryan Painemilla && Juan Crovetto</div>
+            <div style="margin-top: 10px; font-size: 0.8em; color: #888;">&copy; 2024 Hospital SanaVI - Evaluación Final Transversal</div>
+        </footer>
+
+    </body>
+    </html>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-sanavi
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: html-volume
+        configMap:
+          name: sanavi-index-html
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-sanavi
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+

@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: auditor-seguridad
+rules:
+- apiGroups: [""] # "" indica el core API group
+  resources: ["pods", "services", "configmaps"]
+  verbs: ["get", "list", "watch"] # Solo lectura, no puede crear ni borrar
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: auditor-binding
+  namespace: default
+subjects:
+- kind: User
+  name: auditor-externo # Simulamos un usuario auditor
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: auditor-seguridad
+  apiGroup: rbac.authorization.k8s.io

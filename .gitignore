@@ -1,0 +1,15 @@
+# Ignorar carpeta de plugins (muy pesada)
+.terraform/
+
+# Ignorar archivos de estado (CONTIENEN DATOS SENSIBLES)
+*.tfstate
+*.tfstate.*
+
+# Ignorar archivos de variables con claves
+*.tfvars
+
+# Ignorar logs de errores
+crash.log
+
+# Ignorar archivos de sistema
+.DS_Store
