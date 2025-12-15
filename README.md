@@ -58,3 +58,18 @@ graph TD
     LAMBDA -.->|Salida| NAT
     NAT -.-> IGW
     IGW -.- user
+```
+
+## 🛠️ Tecnologías Utilizadas##
+IaC: Terraform
+
+Orquestación: Amazon EKS (Kubernetes)
+
+Backend: AWS Lambda (Python) & API Gateway
+
+Seguridad: RBAC, Network Policies (Calico), IAM Roles
+
+## 👥 Autores
+Bryan Painemilla
+
+Juan Crovetto
